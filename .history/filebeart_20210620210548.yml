@@ -1,0 +1,12 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    -/logs/yarn/container-logs/*/*/*.log
+  fields: {log_type: yarn_yarn}
+  multiline.pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}'
+  multiline.negate: true
+  multiline.match: after
+  
+output.logstash:
+    hosts: ["127.0.0.1:5044"]
